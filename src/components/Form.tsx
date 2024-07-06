@@ -34,17 +34,22 @@ const Form = <T extends FieldValues>(props: PropsWithChildren<Props<T>>) => {
 
   const methods = useForm<T>({ defaultValues: initialValues, mode: 'all' });
 
+  const handleSubmit = async (data: T) => {
+    await onSubmit(data);
+    methods.reset(initialValues);
+  };
+
   return (
     <FormProvider {...methods}>
-      <form onSubmit={methods.handleSubmit(onSubmit)} onChange={onChange}>
-        <div className={clsx('flex w-full', {
+      <form onSubmit={methods.handleSubmit(handleSubmit)} onChange={onChange}>
+        <div className={clsx('animate flex w-full', {
           'flex-col gap-y-4': !horizontal,
           'flex-row gap-x-4': horizontal,
         })}
         >
           {children}
           <button
-            className={clsx('animate btn btn-outlined', {
+            className={clsx('btn btn-outlined', {
               'loading loading-spinner': methods.formState.isSubmitting,
               'mt-6 w-full': !horizontal,
             })}

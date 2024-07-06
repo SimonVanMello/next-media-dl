@@ -1,32 +1,21 @@
-import { ChangeEvent, useState } from 'react';
 import clsx from 'clsx';
 
 import Format from '@app/enums/format.enum';
 
 interface Props {
-  onChange?: (format: Format) => void;
+  value: Format;
+  onChange: (value: Format) => void;
   className?: string;
 }
 
 const FormatSelector = (props: Props) => {
-  const { onChange, className } = props;
-  const [format, setFormat] = useState(Format.MP3);
-
-  const handleChange = (event: ChangeEvent<HTMLSelectElement>) => {
-    const newFormat = event.target.value as Format;
-
-    setFormat(newFormat);
-
-    if (onChange) {
-      onChange(newFormat);
-    }
-  };
+  const { value, onChange, className } = props;
 
   return (
     <select
       className={clsx('animate select select-bordered max-w-fit', className)}
-      onChange={handleChange}
-      value={format}
+      onChange={(e) => onChange(e.target.value as Format)}
+      value={value}
     >
       {Object.values(Format).map((x) => (
         <option key={x}>{x}</option>

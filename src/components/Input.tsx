@@ -27,7 +27,7 @@ const Input = (props: Props) => {
   const { invalid, error, isTouched } = getFieldState(name);
 
   return (
-    <label className="animate form-control w-full" htmlFor={name}>
+    <label className="form-control w-full" htmlFor={name}>
       {label && (
         <div className="label">
           <span className="label-text">
@@ -40,7 +40,7 @@ const Input = (props: Props) => {
         {...register(name)}
         name={name}
         placeholder={placeholder}
-        className={clsx('animate input input-bordered w-full', {
+        className={clsx('input input-bordered w-full', {
           'input-error': invalid && error && isTouched,
         })}
         type={type}
