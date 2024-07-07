@@ -7,6 +7,12 @@ This application can easily be hosted anywhere using Docker. The docker-compose 
 If you just want to run the development version, you can use the `npm run dev` command.
 > Don't forget to install the packages with the `npm i` command.
 
+You can also run the application without cloning the repo by running the following command:
+```bash
+docker run -d -p 3000:3000 --name next-media-dl -e NODE_ENV=production simonvanmello/next-media-dl:latest
+```
+> In this case, no Cloudflare Tunnel is used.
+
 ## Configure Cloudflare Tunnel
 - Go the the [Cloudflare Dashboard](https://dash.cloudflare.com/)
 - Click on the `Zero Trust` tab
