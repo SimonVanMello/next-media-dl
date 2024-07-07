@@ -1,12 +1,10 @@
 services:
   nextjs:
-    build: .
+    image: simonvanmello/next-media-dl:latest
     ports:
       - "3000:3000"
     environment:
       - NODE_ENV=production
-    volumes:
-      - .:/app
 
   cloudflared:
     image: cloudflare/cloudflared:latest
