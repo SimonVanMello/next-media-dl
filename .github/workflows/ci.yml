@@ -43,19 +43,19 @@ jobs:
 
     - name: Copy docker-compose.yml to server
       run: |
-        scp -o StrictHostKeyChecking=no docker-compose.yml -P ${{ secrets.SERVER_SSH_PORT }} ${{ secrets.SERVER_USER }}@${{ secrets.SERVER_HOST }}:${{ secrets.SERVER_OUTPUT_DIR }}
+        scp -o StrictHostKeyChecking=no -P ${{ secrets.SERVER_SSH_PORT }} docker-compose.yml ${{ secrets.SERVER_USER }}@${{ secrets.SERVER_HOST }}:${{ secrets.SERVER_OUTPUT_DIR }}
       shell: bash
 
     - name: Create .env file on server
       run: |
-        ssh -o StrictHostKeyChecking=no ${{ secrets.SERVER_USER }}@${{ secrets.SERVER_HOST }} << 'EOF'
+        ssh -o StrictHostKeyChecking=no ${{ secrets.SERVER_USER }}@${{ secrets.SERVER_HOST }} -p ${{ secrets.SERVER_SSH_PORT }} << 'EOF'
           echo "CLOUDFLARE_TUNNEL_TOKEN=${{ secrets.CLOUDFLARE_TUNNEL_TOKEN }}" > ${{ secrets.SERVER_OUTPUT_DIR }}/.env
         EOF
       shell: bash
 
     - name: Deploy on server
       run: |
-        ssh -o StrictHostKeyChecking=no ${{ secrets.SERVER_USER }}@${{ secrets.SERVER_HOST }} << 'EOF'
+        ssh -o StrictHostKeyChecking=no ${{ secrets.SERVER_USER }}@${{ secrets.SERVER_HOST }} -p ${{ secrets.SERVER_SSH_PORT }} << 'EOF'
           cd ${{ secrets.SERVER_OUTPUT_DIR }}
           docker compose pull
           docker compose up -d
