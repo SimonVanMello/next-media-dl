@@ -1,4 +1,3 @@
-import { useState } from 'react';
 import clsx from 'clsx';
 import axios from 'axios';
 import { toast } from 'react-toastify';
@@ -6,10 +5,12 @@ import { toast } from 'react-toastify';
 import Format from '@app/enums/format.enum';
 import blobUtils from '@app/utils/blob.utils';
 import apiUtils from '@app/utils/api.utils';
+import useAppSelector from '@app/hooks/useAppSelector.hook';
+import userSettingsSelectors from '@app/selectors/userSettings.selectors';
 
-import FormatSelector from './FormatSelector';
-import Form from './Form';
-import Input from './Input';
+import FormatSelector from './settings/FormatSelector';
+import Form from './Inputs/Form';
+import Input from './Inputs/Input';
 
 const initialValues = {
   url: '',
@@ -21,15 +22,16 @@ interface Props {
 
 const Search = (props: Props) => {
   const { className } = props;
-  const [format, setFormat] = useState(Format.MP3);
+
+  const userSettings = useAppSelector(userSettingsSelectors.selectUserSettings);
 
   const onSubmit = async (values: typeof initialValues) => {
     try {
-      const response = await axios.get(`/api/download/${encodeURIComponent(values.url)}?format=${format}`, {
+      const response = await axios.get(`/api/download/${encodeURIComponent(values.url)}?format=${userSettings.format}`, {
         responseType: 'blob',
       });
 
-      const blob = new Blob([response.data], { type: format === Format.MP3 ? 'audio/mpeg' : 'video/mp4' });
+      const blob = new Blob([response.data], { type: userSettings.format === Format.MP3 ? 'audio/mpeg' : 'video/mp4' });
       const fileName = apiUtils.getFileNameFromHeaders(response);
 
       blobUtils.download(blob, fileName);
@@ -53,11 +55,7 @@ const Search = (props: Props) => {
           isRequired
         />
       </Form>
-      <FormatSelector
-        value={format}
-        onChange={setFormat}
-        className="mt-4"
-      />
+      <FormatSelector className="mt-4" />
     </div>
   );
 };

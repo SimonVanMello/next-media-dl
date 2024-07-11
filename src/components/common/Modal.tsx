@@ -1,6 +1,4 @@
-import {
-  PropsWithChildren,
-} from 'react';
+import { PropsWithChildren } from 'react';
 import {
   DialogBackdrop,
   Dialog,
@@ -34,7 +32,7 @@ const Modal = (props: PropsWithChildren<Props>) => {
             className="w-full max-w-md rounded-xl bg-stone-200/5 p-6 backdrop-blur-2xl duration-200 ease-out data-[closed]:transform-[scale(95%)] data-[closed]:opacity-0"
           >
             <div className="flex flex-between mb-4">
-              <DialogTitle as="h3" className="text-base/7 font-medium text-white">
+              <DialogTitle as="h2" className="text-base/7 font-medium text-white">
                 {title}
               </DialogTitle>
               <CloseButton onClick={onClose} />

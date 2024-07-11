@@ -1,38 +1,19 @@
 /* eslint-disable react/jsx-props-no-spreading */
-import { useEffect } from 'react';
 import type { AppProps } from 'next/app';
 import { ToastContainer } from 'react-toastify';
+import { Provider } from 'react-redux';
 
 import '@app/styles/globals.css';
 import 'react-toastify/dist/ReactToastify.css';
 
+import store from '@app/app/store';
+import useInitApp from '@app/hooks/useInitApp.hook';
+
 const App = ({ Component, pageProps }: AppProps) => {
-  useEffect(() => {
-    const animate = () => {
-      const animateElements = document.querySelectorAll('.animate');
-
-      animateElements.forEach((element, index) => {
-        setTimeout(() => {
-          element.classList.add('show');
-        }, index * 150);
-      });
-    };
-
-    const onScroll = () => {
-      if (window.scrollY > 0) {
-        document.documentElement.classList.add('scrolled');
-      } else {
-        document.documentElement.classList.remove('scrolled');
-      }
-    };
-
-    animate();
-
-    document.addEventListener('scroll', onScroll);
-  }, []);
+  useInitApp();
 
   return (
-    <>
+    <Provider store={store}>
       <Component {...pageProps} />
       <ToastContainer
         position="bottom-right"
@@ -46,7 +27,7 @@ const App = ({ Component, pageProps }: AppProps) => {
         pauseOnHover
         theme="dark"
       />
-    </>
+    </Provider>
   );
 };
 
