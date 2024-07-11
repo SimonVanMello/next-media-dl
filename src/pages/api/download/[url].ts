@@ -46,7 +46,6 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
 
     videoStream.pipe(res);
   } catch (error) {
-    console.error('Error downloading video:', error);
     res.status(400).json({ error: 'Failed to download video' });
   }
 };

@@ -1,8 +1,10 @@
 /* eslint-disable react/jsx-props-no-spreading */
 import { useEffect } from 'react';
 import type { AppProps } from 'next/app';
+import { ToastContainer } from 'react-toastify';
 
 import '@app/styles/globals.css';
+import 'react-toastify/dist/ReactToastify.css';
 
 const App = ({ Component, pageProps }: AppProps) => {
   useEffect(() => {
@@ -30,7 +32,21 @@ const App = ({ Component, pageProps }: AppProps) => {
   }, []);
 
   return (
-    <Component {...pageProps} />
+    <>
+      <Component {...pageProps} />
+      <ToastContainer
+        position="bottom-right"
+        autoClose={5000}
+        hideProgressBar={false}
+        newestOnTop
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="dark"
+      />
+    </>
   );
 };
 

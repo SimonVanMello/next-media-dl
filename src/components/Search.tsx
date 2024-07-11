@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import clsx from 'clsx';
 import axios from 'axios';
+import { toast } from 'react-toastify';
 
 import Format from '@app/enums/format.enum';
 import blobUtils from '@app/utils/blob.utils';
@@ -33,8 +34,7 @@ const Search = (props: Props) => {
 
       blobUtils.download(blob, fileName);
     } catch (error) {
-      // TODO: add error toast
-      console.log(error);
+      toast.error('An error occured while downloading the media.');
     }
   };
 
