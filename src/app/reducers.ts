@@ -1,9 +1,17 @@
-import { combineReducers } from '@reduxjs/toolkit';
+import { persistReducer } from 'redux-persist';
+import storage from 'redux-persist/lib/storage';
 
 import userSettingsSlice from '@app/slices/userSettings.slice';
 
-const reducers = combineReducers({
-  userSettings: userSettingsSlice.reducer,
-});
+const userSettingsPersistConfig = {
+  key: 'userSettings',
+  storage,
+};
+
+const userSettingsReducer = persistReducer(userSettingsPersistConfig, userSettingsSlice.reducer);
+
+const reducers = {
+  userSettingsReducer,
+};
 
 export default reducers;

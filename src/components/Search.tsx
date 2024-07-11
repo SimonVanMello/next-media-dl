@@ -55,7 +55,7 @@ const Search = (props: Props) => {
           isRequired
         />
       </Form>
-      <FormatSelector className="mt-4" />
+      <FormatSelector className="mt-4 animate" />
     </div>
   );
 };

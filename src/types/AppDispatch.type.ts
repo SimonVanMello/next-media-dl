@@ -1,3 +1,3 @@
-import store from '@app/app/store';
+import reduxStore from '@app/app/store';
 
-export type AppDispatch = typeof store.dispatch;
+export type AppDispatch = typeof reduxStore.store.dispatch;
