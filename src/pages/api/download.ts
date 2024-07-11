@@ -4,6 +4,7 @@ import ytdl from 'ytdl-core';
 import Format from '@app/enums/format.enum';
 import HttpMethod from '@app/enums/httpMethod.enum';
 import fileNameUtils from '@app/utils/fileName.utils';
+import MediaQuality from '@app/enums/mediaQuality.enum';
 
 const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   if (req.method !== HttpMethod.GET) {
@@ -12,7 +13,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
     return;
   }
 
-  const { url, format } = req.query;
+  const { url, format, quality } = req.query;
 
   if (typeof url !== 'string' || typeof format !== 'string') {
     res.status(400).json({ error: 'Invalid URL or format' });
@@ -30,6 +31,12 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
     return;
   }
 
+  // @ts-ignore
+  if (!Object.values(MediaQuality).includes(quality)) {
+    res.status(400).json({ error: 'Invalid quality' });
+    return;
+  }
+
   try {
     const info = await ytdl.getInfo(url);
     const { title } = info.videoDetails;
@@ -42,6 +49,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
 
     const videoStream = ytdl(url, {
       filter: format === 'mp3' ? 'audioonly' : 'audioandvideo',
+      quality,
     });
 
     videoStream.pipe(res);
