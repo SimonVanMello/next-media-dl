@@ -1,9 +1,11 @@
-import Format from '@app/enums/format.enum';
-import MediaQuality from '@app/enums/mediaQuality.enum';
-import axios from 'axios';
 import queryString from 'query-string';
 
-const baseEndpoint = '/api/download';
+import Format from '@app/enums/format.enum';
+import MediaQuality from '@app/enums/mediaQuality.enum';
+
+import axios from './axios.service';
+
+const baseEndpoint = '/download';
 
 interface DownloadMediaParams {
   url: string;

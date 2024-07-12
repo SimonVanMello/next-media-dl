@@ -21,6 +21,7 @@
     "react/require-default-props": 0,
     "arrow-body-style": "off",
     "no-param-reassign": "off",
-    "import/no-named-as-default": "off"
+    "import/no-named-as-default": "off",
+    "@typescript-eslint/no-unused-expressions": "off"
   }
 }

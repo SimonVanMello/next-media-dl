@@ -1,5 +1,5 @@
 import { NextApiRequest, NextApiResponse } from 'next';
-import ytdl from 'ytdl-core';
+import ytdl from '@distube/ytdl-core';
 
 import Format from '@app/enums/format.enum';
 import HttpMethod from '@app/enums/httpMethod.enum';

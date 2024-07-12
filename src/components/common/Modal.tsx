@@ -29,7 +29,7 @@ const Modal = (props: PropsWithChildren<Props>) => {
         <div className="flex min-h-full items-center justify-center p-4">
           <DialogPanel
             transition
-            className="w-full max-w-md rounded-xl bg-stone-500/5 p-6 backdrop-blur-2xl ease-out data-[closed]:transform-[scale(95%)] data-[closed]:opacity-0 shadow-xl border border-neutral-900"
+            className="w-full max-w-md rounded-xl bg-stone-500/5 p-6 backdrop-blur-2xl ease-out data-[closed]:transform-[scale(95%)] data-[closed]:opacity-0 border border-neutral-800 shadow-lg"
           >
             <div className="flex flex-between mb-4">
               <DialogTitle as="h2" className="text-base/7 font-medium text-white">
