@@ -1,4 +1,4 @@
-import Layout from '@app/components/Layout';
+import Layout from '@app/components/common/Layout';
 import Search from '@app/components/Search';
 
 const Index = () => {

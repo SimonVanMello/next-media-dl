@@ -1,36 +1,43 @@
 /* eslint-disable react/jsx-props-no-spreading */
-import { useEffect } from 'react';
 import type { AppProps } from 'next/app';
+import { ToastContainer } from 'react-toastify';
+import { Provider } from 'react-redux';
+import { PersistGate } from 'redux-persist/integration/react';
 
 import '@app/styles/globals.css';
+import 'react-toastify/dist/ReactToastify.css';
 
-const App = ({ Component, pageProps }: AppProps) => {
-  useEffect(() => {
-    const animate = () => {
-      const animateElements = document.querySelectorAll('.animate');
+import reduxStore from '@app/app/store';
+import useInitApp from '@app/hooks/useInitApp.hook';
+import Spinner from '@app/components/common/Spinner';
 
-      animateElements.forEach((element, index) => {
-        setTimeout(() => {
-          element.classList.add('show');
-        }, index * 150);
-      });
-    };
-
-    const onScroll = () => {
-      if (window.scrollY > 0) {
-        document.documentElement.classList.add('scrolled');
-      } else {
-        document.documentElement.classList.remove('scrolled');
-      }
-    };
-
-    animate();
-
-    document.addEventListener('scroll', onScroll);
-  }, []);
+const ReduxInitializedApp = ({ Component, pageProps }: AppProps) => {
+  useInitApp();
 
   return (
     <Component {...pageProps} />
+  );
+};
+
+const App = (props: AppProps) => {
+  return (
+    <Provider store={reduxStore.store}>
+      <PersistGate loading={<Spinner />} persistor={reduxStore.persistor}>
+        <ReduxInitializedApp {...props} />
+        <ToastContainer
+          position="bottom-right"
+          autoClose={5000}
+          hideProgressBar={false}
+          newestOnTop
+          closeOnClick
+          rtl={false}
+          pauseOnFocusLoss
+          draggable
+          pauseOnHover
+          theme="dark"
+        />
+      </PersistGate>
+    </Provider>
   );
 };
 

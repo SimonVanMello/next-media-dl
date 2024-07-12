@@ -36,3 +36,4 @@ docker run -d -p 3000:3000 --name next-media-dl -e NODE_ENV=production simonvanm
 - [ ] Add support for Soundcloud
 - [ ] Create a settings menu
 - [ ] Add support for Spotify (songs and playlists)
+- [ ] Add proxy support (bypass Youtube ratelimits)

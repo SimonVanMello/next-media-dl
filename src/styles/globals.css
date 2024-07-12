@@ -8,8 +8,13 @@ html {
 }
 
 html,
-body {
+body,
+#__next {
   @apply size-full;
+}
+
+#__next {
+  @apply flex flex-col;
 }
 
 body {
@@ -21,6 +26,12 @@ body {
   @apply selection:text-black;
 }
 
+header,
+main,
+footer {
+  @apply mx-auto max-w-screen-sm px-5;
+}
+
 header {
   @apply fixed top-0 left-0 right-0 z-50 py-5;
   @apply bg-stone-950/25;
@@ -28,7 +39,7 @@ header {
 }
 
 main {
-  @apply flex-1 py-32;
+  @apply grow py-32;
 }
 
 footer {
