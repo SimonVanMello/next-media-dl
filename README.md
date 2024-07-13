@@ -32,7 +32,7 @@ docker run -d -p 3000:3000 --name next-media-dl -e NODE_ENV=production simonvanm
 ## Roadmap
 - [x] Add support for Youtube videos
 - [x] Docker support
-- [ ] Handle Youtube playlists downloads
+- [x] Handle Youtube playlists downloads
 - [ ] Add support for Soundcloud
 - [x] Create a settings menu
 - [ ] Add support for Spotify (songs and playlists)
