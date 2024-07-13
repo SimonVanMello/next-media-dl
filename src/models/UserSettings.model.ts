@@ -7,8 +7,8 @@ export interface BaseSettings {
 
 interface UserSettings {
   format: Format;
-  mp3: BaseSettings,
-  mp4: BaseSettings,
+  mp3: BaseSettings;
+  mp4: BaseSettings;
 }
 
 export default UserSettings;
