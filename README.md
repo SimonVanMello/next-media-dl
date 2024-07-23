@@ -14,7 +14,7 @@ docker run -d -p 3000:3000 --name next-media-dl -e NODE_ENV=production simonvanm
 > In this case, no Cloudflare Tunnel is used.
 
 ## Configure Cloudflare Tunnel
-- Go the the [Cloudflare Dashboard](https://dash.cloudflare.com/)
+- Go to the [Cloudflare Dashboard](https://dash.cloudflare.com/)
 - Click on the `Zero Trust` tab
 - Expend the `Networks` tab by clicking on the down arrow
 - Go to the `Tunnels` tab
